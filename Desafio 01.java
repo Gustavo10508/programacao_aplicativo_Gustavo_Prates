@@ -1,34 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package javaapplication10;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-/**
- *
- * @author Aluno
- */
 public class JavaApplication10 {
 
-    @SuppressWarnings("empty-statement")
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
-        // Desafio JAVA 01
-        int opcao, indiExtrato, parcelas,protocolo;
+        int opcao = -1, parcelas, protocolo, indiExtrato = 0;
         String opcao2;
-        double reais, dolar, deposito, emprestimo, salario = 0, divisao,porcento;
-        double[] extrato = new double[10];
-
-        opcao = -1;
-        reais = 100.00;
-        dolar = 0.00;
-        indiExtrato = 0;
-       
+        double reais = 100.00, dolar = 0.0, compra, cot = 5.32, deposito, emprestimo, salario = 0, porcento, juros = 0.02;
+        String[] extrato = new String[50]; // histórico textual
 
         while (opcao != 0) {
             System.out.println("""
@@ -45,17 +28,13 @@ public class JavaApplication10 {
             entrada.nextLine();
 
             switch (opcao) {
-
                 case 1 -> {
-                    System.out.println("Seu saldo em REAIS e de: R$" + reais
-                            + "\nSeu saldo em DOLAR e: US$" + dolar + "\n");
-
+                    System.out.println("Seu saldo em REAIS: R$" + reais);
+                    System.out.println("Seu saldo em DOLAR: US$" + dolar + "\n");
                     System.out.println("""
                                        Deseja voltar ao menu inicial, digite: (V)
                                        Deseja encerrar o programa, digite: (E)""");
-
                     opcao2 = entrada.nextLine();
-
                     if (opcao2.equalsIgnoreCase("E")) {
                         opcao = 0;
                         System.out.println("Sistema encerrado...");
@@ -63,42 +42,26 @@ public class JavaApplication10 {
                 }
 
                 case 2 -> {
+                    double depositoLocal;
                     do {
                         System.out.println("Insira o valor do deposito: ");
-                        deposito = entrada.nextDouble();
+                        depositoLocal = entrada.nextDouble();
                         entrada.nextLine();
-
-                        if (deposito > 0 && deposito < 5000) {
-                            reais = deposito + reais;
-
+                        if (depositoLocal > 0 && depositoLocal < 5000) {
+                            reais += depositoLocal;
                             if (indiExtrato < extrato.length) {
-                                extrato[indiExtrato] = deposito;
+                                extrato[indiExtrato] = "Depósito: R$ " + depositoLocal;
                                 indiExtrato++;
-                            } else {
-                                System.out.println("Extrato cheio! Não é possível armazenar mais depósitos.");
                             }
-
-                            System.out.println("Valor inserido com sucesso!");
-                            System.out.println("O valor depositado e de R$" + deposito + "\n");
-
+                            System.out.println("Depósito realizado com sucesso!");
                         } else {
-                            System.out.println("""
-                                               Valor invalido!!!
-                                               O deposito deve ser maior que R$ 0,00 e ate R$ 5.000,00.
-                                               Digite novamente.\n""");
-
-                            System.out.println("""
-                                               Deseja voltar ao menu inicial, digite: (V)
-                                               Deseja encerrar o programa, digite: (E)/n""");
+                            System.out.println("Valor inválido! Deve ser entre R$0 e R$5000.");
                         }
-                    } while (deposito <= 0 || deposito >= 5000);
-
+                    } while (depositoLocal <= 0 || depositoLocal >= 5000);
                     System.out.println("""
                                        Deseja voltar ao menu inicial, digite: (V)
-                                       Deseja encerrar o programa, digite: (E)\n""");
-
+                                       Deseja encerrar o programa, digite: (E)""");
                     opcao2 = entrada.nextLine();
-
                     if (opcao2.equalsIgnoreCase("E")) {
                         opcao = 0;
                         System.out.println("Sistema encerrado...");
@@ -107,83 +70,114 @@ public class JavaApplication10 {
 
                 case 3 -> {
                     if (indiExtrato == 0) {
-                        System.out.println("Nenhum extrato");
+                        System.out.println("Não há movimentações ainda.");
                     } else {
-                        for (int i = indiExtrato - 1; i >= 0; i--) {
-                            System.out.println((indiExtrato - i) + ") " + extrato[i]);
+                        System.out.println("=== Extrato ===");
+                        for (int i = 0; i < indiExtrato; i++) {
+                            System.out.println((i + 1) + ") " + extrato[i]);
                         }
-                         System.out.println("""
+                    }
+                    System.out.println("\nSaldo atual:");
+                    System.out.println("Reais: R$ " + reais);
+                    System.out.println("Dólar: US$ " + dolar);
+
+                    System.out.println("""
                                        Deseja voltar ao menu inicial, digite: (V)
                                        Deseja encerrar o programa, digite: (E)""");
-
                     opcao2 = entrada.nextLine();
-
                     if (opcao2.equalsIgnoreCase("E")) {
                         opcao = 0;
                         System.out.println("Sistema encerrado...");
-                    }
                     }
                 }
 
                 case 4 -> {
-                    do{
-                    System.out.println("Insira o valor do emprestimo: ");
-                    emprestimo = entrada.nextDouble();
-                    entrada.nextLine();
-                    if (emprestimo < 200 || emprestimo > 1000000) {
-                        System.out.println("Valor invalido\nO valor deve ser maior que 200 e menor que 100.000,00\n");
-                    }
-
-                    if (emprestimo >= 200 && emprestimo <= 1000000) {
-                        System.out.println("Insira o salario bruto: ");
-                        salario = entrada.nextDouble();}
-                        do{
-                        System.out.println("insira o numero de parcelas (6, 12, 18, 24, 30, 36, 40, 48, 56, 60 ou 72.): ");
-                        parcelas = entrada.nextInt();
+                    do {
+                        System.out.println("Insira o valor do emprestimo: ");
+                        emprestimo = entrada.nextDouble();
                         entrada.nextLine();
-                        
-                        
-                    if (parcelas == 6 || parcelas == 12 || parcelas == 18 || parcelas == 24 
-                        || parcelas == 30 || parcelas == 36 || parcelas == 40 
-                        || parcelas == 48 || parcelas == 56 || parcelas == 60 || parcelas == 72) {
-    
-                        divisao = emprestimo / parcelas;
-                        porcento = salario * 0.30;
+                        if (emprestimo < 200 || emprestimo > 1000000) {
+                            System.out.println("Valor inválido! Deve ser entre R$200 e R$1.000.000");
+                        } else {
+                            System.out.println("Insira o salário bruto: ");
+                            salario = entrada.nextDouble();
+                            entrada.nextLine();
 
-                    if (porcento > divisao) {
-                        Random random = new Random();
-                        protocolo = 100000 + random.nextInt(900000); 
-                        System.out.println("Emprestimo disponivel, entre em contato com a central e informe o numero de protocolo " + "EM"+protocolo);
-                    } else {
-                        System.out.println("Empréstimo indisponível (parcela maior que 30% do salário).");
-                    }
+                            do {
+                                System.out.println("Insira o número de parcelas (6,12,18,24,30,36,40,48,56,60,72): ");
+                                parcelas = entrada.nextInt();
+                                entrada.nextLine();
+                                if (parcelas == 6 || parcelas == 12 || parcelas == 18 || parcelas == 24
+                                        || parcelas == 30 || parcelas == 36 || parcelas == 40
+                                        || parcelas == 48 || parcelas == 56 || parcelas == 60 || parcelas == 72) {
 
-                    } else {
-                    System.out.println("Número de parcelas inválido...");
-                    }
+                                    double jurosTotais = emprestimo * juros * parcelas;
+                                    double montante = emprestimo + jurosTotais;
+                                    double valorParcela = montante / parcelas;
+                                    porcento = salario * 0.30;
 
-                        
-                    }while (parcelas != 6 && parcelas != 12 && parcelas != 18 && parcelas != 24 
-                             && parcelas != 30 && parcelas != 36 && parcelas != 40 
-                             && parcelas != 48 && parcelas != 56 && parcelas != 60 && parcelas != 72 );
-                        
-                     
-                       
-                    }while (emprestimo < 200 || emprestimo > 1000000);
-                    
-                     System.out.println("""
+                                    if (porcento >= valorParcela) {
+                                        Random random = new Random();
+                                        protocolo = 100000 + random.nextInt(900000);
+                                        System.out.println("\nEmpréstimo disponível. Protocolo EM" + protocolo);
+                                        System.out.printf("Valor da parcela: R$ %.2f x %d\n", valorParcela, parcelas);
+                                        System.out.println("Valor do empréstimo: R$ " + emprestimo);
+                                        System.out.printf("Valor total a pagar: R$ %.2f\n", montante);
+                                    } else {
+                                        System.out.println("Empréstimo indisponível (parcela maior que 30% do salário).");
+                                    }
+                                } else {
+                                    System.out.println("Número de parcelas inválido!");
+                                }
+                            } while (parcelas != 6 && parcelas != 12 && parcelas != 18 && parcelas != 24
+                                    && parcelas != 30 && parcelas != 36 && parcelas != 40
+                                    && parcelas != 48 && parcelas != 56 && parcelas != 60 && parcelas != 72);
+                        }
+                    } while (emprestimo < 200 || emprestimo > 1000000);
+
+                    System.out.println("""
                                        Deseja voltar ao menu inicial, digite: (V)
                                        Deseja encerrar o programa, digite: (E)""");
-                    
-
                     opcao2 = entrada.nextLine();
-
                     if (opcao2.equalsIgnoreCase("E")) {
                         opcao = 0;
                         System.out.println("Sistema encerrado...");
-                    
                     }
-                    
+                }
+
+                case 5 -> {
+                    String opcao3, conf;
+                    double valor;
+                    System.out.println("Seu saldo em reais: R$ " + reais);
+                    System.out.println("Qual a quantidade de dólar deseja comprar? Cotação: " + cot);
+                    compra = entrada.nextDouble();
+                    entrada.nextLine();
+
+                    if (compra * cot > reais) {
+                        System.out.println("Saldo insuficiente!");
+                        System.out.println("Deseja simular novamente (R), voltar ao menu (V) ou encerrar (E)?");
+                        opcao3 = entrada.nextLine();
+                        if (opcao3.equalsIgnoreCase("R")) opcao = 5;
+                        if (opcao3.equalsIgnoreCase("E")) opcao = 0;
+                    } else {
+                        System.out.println("Para confirmar digite (S) e para cancelar digite (N)");
+                        conf = entrada.nextLine();
+                        if (conf.equalsIgnoreCase("S")) {
+                            valor = compra * cot;
+                            reais -= valor;
+                            dolar += compra;
+                            if (indiExtrato < extrato.length) {
+                                extrato[indiExtrato] = "Compra de dólar: -R$ " + valor + " (US$ " + compra + ")";
+                                indiExtrato++;
+                            }
+                            System.out.println("Compra realizada com sucesso!");
+                        }
+                        System.out.println("Reais: R$ " + reais + "\nDólar: US$ " + dolar);
+                        System.out.println("Deseja simular novamente (R), voltar ao menu (V) ou encerrar (E)?");
+                        opcao3 = entrada.nextLine();
+                        if (opcao3.equalsIgnoreCase("R")) opcao = 5;
+                        if (opcao3.equalsIgnoreCase("E")) opcao = 0;
+                    }
                 }
             }
         }
