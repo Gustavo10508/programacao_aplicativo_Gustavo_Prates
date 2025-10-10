@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 
 public class Atividade008 {
+
+    private static int calendario(int num) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
                     //QUESTÂO 01
 //    public static double calcDelt(double a, double b, double c){
 //        return (b*b) - (4*a*c);
@@ -30,9 +34,52 @@ public class Atividade008 {
 //    }
     
                 
-                //QUESTÂO 02
+                //QUESTÂO 03.01
+    
+//      public static class calendario{
+//      public void op (int escolha){
+//          switch (escolha){
+//          case 1 -> System.out.println("JANEIRO");
+//          case 2 -> System.out.println("FEVEREIRO");
+//          case 3 -> System.out.println("MARÇO");
+//          case 4 -> System.out.println("ABRIL");
+//          case 5 -> System.out.println("MAIO");
+//          case 6 -> System.out.println("JUNHO");
+//          case 7 -> System.out.println("JULHO");
+//          case 8 -> System.out.println("AGOSTO");
+//          case 9 -> System.out.println("SETEMBRO");
+//          case 10 -> System.out.println("OUTUBRO");
+//          case 11 -> System.out.println("NOVEMBRO");
+//          case 12 -> System.out.println("DEZEMBRO");
+//          default -> System.out.println("o numero deve ser entre 1 e 12");
+//          
+//      }
+//      }
+//      }
     
     
+    
+                //QUESTÃO 03.02
+//    
+//    public static class ano{
+//        public String dia (int select){
+//            String [] calen = {"Janeiro", "Fevereiro", "Marco","Abril","maio","junho","julho","agosto","setembro", "outubro","novembro", "dezembro"
+//                    
+//            };
+//            if (select >=1 || select <=12){
+//                return calen[select-1];}
+//            else {return "mes invalido";}
+//            
+//            
+//        }
+//    }
+                //questão 04
+    
+    public static class salario{
+        public double func (double acima){
+            
+        }
+    }
     
     public static void main(String[] args) {
                     //QUESTÂO 01
@@ -83,7 +130,32 @@ public class Atividade008 {
 //                            System.out.println(resul);}
 //            
 //                        }
-    }
+    
+    
+                                    //questão 03.01
+//                                    calendario cal = new calendario();
+//                                    
+//                                    int escolha;
+//                                    do{
+//                            System.out.println("insira o numero referente ao mes: ");
+//                            escolha = entrada.nextInt();
+//                            
+//                                    }while(escolha <1 || escolha >12);
+//                                    cal.op(escolha);
+                            
+                                        
+                                      //questão 03.02
+//                                  ano an = new ano();
+//
+//                                System.out.print("Insira um número entre 1 e 12: ");
+//                                int op = entrada.nextInt();
+//
+//                                String mes = an.dia(op);  // chama o método que retorna o mês
+//                                System.out.println("Mês correspondente: " + mes);
+//                                      
+                                      
+    }  
+    
 }
                 
                 
