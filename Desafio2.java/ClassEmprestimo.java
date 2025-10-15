@@ -1,4 +1,4 @@
-package javaapplication10;
+package desafio.dois;
 
 import java.util.Random;
 
