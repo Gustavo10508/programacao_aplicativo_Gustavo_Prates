@@ -1,4 +1,4 @@
-package javaapplication10;
+package desafio.dois;
 
 public class ExtratoBancario {
     private final String[] extrato;
